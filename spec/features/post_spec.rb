@@ -34,8 +34,6 @@ describe 'navigate' do
 		end
 
 		it 'can be created from new form page' do 
-
-
 			fill_in 'post[date]', with: Date.today
 			fill_in 'post[rationale]', with: "Some rationale"
 			click_on "Save"
