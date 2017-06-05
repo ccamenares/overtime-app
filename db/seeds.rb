@@ -12,4 +12,5 @@
 	Post.create!(date: Date.today, rationale: "#{post} rationale content", user_id: @user.id)
 end
 
+puts "1 user has been created"
 puts "100 posts have been created"
