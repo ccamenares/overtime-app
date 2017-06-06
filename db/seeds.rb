@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 @user = User.create(email: "test@test.com", password: "password", password_confirmation: "password", first_name: "John", last_name: "Snow")
-@admin_user = User.create(email: "admin@admin.com", password: "password", password_confirmation: "password", first_name: "John", last_name: "Snow", type: "AdminUser")
+@admin_user = AdminUser.create(email: "admin@admin.com", password: "password", password_confirmation: "password", first_name: "Admin", last_name: "Admin")
 
 
 100.times do |post|
