@@ -7,10 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 @user = User.create(email: "test@test.com", password: "password", password_confirmation: "password", first_name: "John", last_name: "Snow")
+@admin_user = User.create(email: "admin@admin.com", password: "password", password_confirmation: "password", first_name: "John", last_name: "Snow", type: "AdminUser")
+
 
 100.times do |post|
 	Post.create!(date: Date.today, rationale: "#{post} rationale content", user_id: @user.id)
 end
 
 puts "1 user has been created"
+puts "1 admin user has been created"
 puts "100 posts have been created"
