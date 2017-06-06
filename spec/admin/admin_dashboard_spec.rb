@@ -19,6 +19,15 @@ RSpec.feature "admin dashboard" do
 
 		expect(current_path).to eq(root_path)
 	end
+
+	scenario "can be reachd by a non-admin user" do 
+		admin_user = FactoryGirl.create(:admin_user)
+		login_as(admin_user, :scope => :admin_user)
+
+		visit admin_root_path
+
+		expect(page.status_code).to eq(200)
+	end
 end
 
 __END__
