@@ -4,6 +4,7 @@ describe 'navigate' do
 	before do 
 			@user = FactoryGirl.create(:user)
 			@post = FactoryGirl.create(:post)
+			@post.update(user_id: @user.id)
 			login_as(@user)
 	end
 	describe 'index' do 
@@ -22,6 +23,17 @@ describe 'navigate' do
 			post2 = FactoryGirl.create(:second_post)
 			visit posts_path
 			expect(page).to have_content(/Rationale|content/)
+		end
+
+		it 'has a scope so that only owners or admins can see thier posts' do 
+			post1 = Post.create(date: Date.today, rationale: "Hello", user_id: @user.id)
+			post2 = Post.create(date: Date.today, rationale: "Hello", user_id: @user.id)			
+			other_user = User.create(first_name: "Non", last_name: "Authorized", email: "non@authorized.com", password: "password", password_confirmation: "password")
+			post_from_other_user = Post.create(date: Date.today, rationale: "This post shouldn't be seen", user_id: other_user.id)
+
+			visit posts_path
+
+			expect(page).not_to have_content(/This post shouldn't be seen/)
 		end
 	end
 
