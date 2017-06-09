@@ -26,10 +26,10 @@ describe 'navigate' do
 		end
 
 		it 'has a scope so that only owners or admins can see thier posts' do 
-			post1 = Post.create(date: Date.today, rationale: "Hello", user_id: @user.id)
-			post2 = Post.create(date: Date.today, rationale: "Hello", user_id: @user.id)			
+			post1 = Post.create(date: Date.today, rationale: "Hello", user_id: @user.id, overtime_request: 3.5)
+			post2 = Post.create(date: Date.today, rationale: "Hello", user_id: @user.id, overtime_request: 3.5)			
 			other_user = User.create(first_name: "Non", last_name: "Authorized", email: "non@authorized.com", password: "password", password_confirmation: "password")
-			post_from_other_user = Post.create(date: Date.today, rationale: "This post shouldn't be seen", user_id: other_user.id)
+			post_from_other_user = Post.create(date: Date.today, rationale: "This post shouldn't be seen", user_id: other_user.id, overtime_request: 3.5)
 
 			visit posts_path
 
@@ -65,14 +65,15 @@ describe 'navigate' do
 		it 'can be created from new form page' do 
 			fill_in 'post[date]', with: Date.today
 			fill_in 'post[rationale]', with: "Some rationale"
-			click_on "Save"
+			fill_in 'post[overtime_request]', with: 4.5
 
-			expect(page).to have_content("Some rationale")
+			expect { click_on "Save" }.to change(Post, :count).by(1)
 		end
 
 		it 'will have a user associated with it' do 
 			fill_in 'post[date]', with: Date.today
 			fill_in 'post[rationale]', with: "User_Association"
+			fill_in 'post[overtime_request]', with: 4.5
 			click_on "Save"
 
 			expect(@user.posts.last.rationale).to eq ("User_Association")
