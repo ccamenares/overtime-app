@@ -1,0 +1,2 @@
+module AudlitLogsHelper
+end
