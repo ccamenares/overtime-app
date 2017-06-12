@@ -26,6 +26,16 @@ RSpec.describe User, type: :model do
       @user.phone = nil
       expect(@user).to_not be_valid
     end
+
+    it 'requires the phone attr to only contian integers' do 
+      @user.phone = 'mygreatstr'
+      expect(@user).to_not be_valid
+    end
+
+    it 'requires the phone attr to only have 10 chars' do 
+      @user.phone = '12345678910'
+      expect(@user).to_not be_valid
+    end
   end
 
 	describe "custom name methods" do 
