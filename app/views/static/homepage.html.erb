@@ -1,7 +1,6 @@
-<div class="jumbotron">
-	<h2>Hello, world!</h2>
-	<p> Template </p>
-	<p>
-		<a class="btn btn-primary btn-large" href="#">Learn More</a>
-	</p>
-</div>
+<% if admin_types.include?(current_user.try(:type)) %>
+	<%= render 'admin' %>
+<% else %>
+	<%= render 'employee' %>
+
+<% end %>
