@@ -9,7 +9,7 @@
 @user = User.create(email: "test@test.com", 
 										password: "password", 
 										password_confirmation: "password", 
-										first_name: "John", 
+										first_name: "Jon", 
 										last_name: "Snow",
 										phone: "4322386131")
 

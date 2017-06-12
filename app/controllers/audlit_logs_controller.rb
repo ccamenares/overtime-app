@@ -1,2 +1,0 @@
-class AudlitLogsController < ApplicationController
-end
