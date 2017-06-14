@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170614184340) do
+ActiveRecord::Schema.define(version: 20170614185852) do
 
   create_table "audit_logs", force: :cascade do |t|
     t.integer  "user_id"
@@ -41,12 +41,12 @@ ActiveRecord::Schema.define(version: 20170614184340) do
 
   create_table "posts", force: :cascade do |t|
     t.date     "date"
-    t.text     "rationale"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.text     "work_performed"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "user_id"
-    t.integer  "status",      default: 0
-    t.decimal  "daily_hours", default: "0.0"
+    t.integer  "status",         default: 0
+    t.decimal  "daily_hours",    default: "0.0"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

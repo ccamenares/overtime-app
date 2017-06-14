@@ -22,14 +22,14 @@ describe 'navigate' do
 		it 'has a list of posts' do 
 			post2 = FactoryGirl.create(:second_post)
 			visit posts_path
-			expect(page).to have_content(/Rationale|content/)
+			expect(page).to have_content(/work_performed|content/)
 		end
 
 		it 'has a scope so that only owners or admins can see thier posts' do 
-			post1 = Post.create(date: Date.today, rationale: "Hello", user_id: @user.id, daily_hours: 3.5)
-			post2 = Post.create(date: Date.today, rationale: "Hello", user_id: @user.id, daily_hours: 3.5)			
+			post1 = Post.create(date: Date.today, work_performed: "Hello", user_id: @user.id, daily_hours: 3.5)
+			post2 = Post.create(date: Date.today, work_performed: "Hello", user_id: @user.id, daily_hours: 3.5)			
 			other_user = User.create(first_name: "Non", last_name: "Authorized", email: "non@authorized.com", password: "password", password_confirmation: "password", phone: "5555555555")
-			post_from_other_user = Post.create(date: Date.today, rationale: "This post shouldn't be seen", user_id: other_user.id, daily_hours: 3.5)
+			post_from_other_user = Post.create(date: Date.today, work_performed: "This post shouldn't be seen", user_id: other_user.id, daily_hours: 3.5)
 			visit posts_path
 
 			expect(page).not_to have_content(/This post shouldn't be seen/)
@@ -63,7 +63,7 @@ describe 'navigate' do
 
 		it 'can be created from new form page' do 
 			fill_in 'post[date]', with: Date.today
-			fill_in 'post[rationale]', with: "Some rationale"
+			fill_in 'post[work_performed]', with: "Some work_performed"
 			fill_in 'post[daily_hours]', with: 4.5
 
 			expect { click_on "Save" }.to change(Post, :count).by(1)
@@ -71,11 +71,11 @@ describe 'navigate' do
 
 		it 'will have a user associated with it' do 
 			fill_in 'post[date]', with: Date.today
-			fill_in 'post[rationale]', with: "User_Association"
+			fill_in 'post[work_performed]', with: "User_Association"
 			fill_in 'post[daily_hours]', with: 4.5
 			click_on "Save"
 
-			expect(@user.posts.last.rationale).to eq ("User_Association")
+			expect(@user.posts.last.work_performed).to eq ("User_Association")
 		end
 	end
 
@@ -85,7 +85,7 @@ describe 'navigate' do
 			click_link("edit_#{@post.id}")
 
 			fill_in 'post[date]', with: Date.today
-			fill_in 'post[rationale]', with: "Edited Content"
+			fill_in 'post[work_performed]', with: "Edited Content"
 			click_on "Save"
 
 			expect(page).to have_content("Edited Content")
