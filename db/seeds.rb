@@ -11,14 +11,18 @@
 										password_confirmation: "password", 
 										first_name: "Jon", 
 										last_name: "Snow",
-										phone: "4322386131")
+										phone: "4322386131",
+										ssn: 1234,
+										company: "ABC Company")
 
 @admin_user = AdminUser.create(email: "admin@admin.com", 
 															 password: "password", 
 															 password_confirmation: "password", 
 															 first_name: "Admin", 
 															 last_name: "Admin",
-															 phone: "4322386131")
+															 phone: "4322386131",
+															 ssn: 1234,
+															 company: "ABC Company")
 
 
 100.times do |post|
